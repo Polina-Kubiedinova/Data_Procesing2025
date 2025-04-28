@@ -4,20 +4,49 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import jakarta.servlet.ServletException;
+import java.util.List;
+import java.io.BufferedReader;
 import java.io.IOException;
 import com.google.gson.Gson;
+import com.lab.variant.Cosmetic;
+import com.lab.variant.CosService;
 
 @WebServlet(urlPatterns = "/cos")
 
 public class CosServlet extends HttpServlet{
+    private CosService cosService =new CosService();
+    private Gson gson = new Gson();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        Cosmetic cos = new Cosmetic("345 Relief Cream", "/images/cream.jpg","Dr. Althea",855,"Aqua, Propanediol, Glycerin, Cyclohexasiloxane, 1,2-Hexanediol, Niacinamide, Caprylic/capric, Triglyceride, Polyglycerin-3, Panthenol, Polyglyceryl-10 Stearate, Hydrogenated Polydecene, Hydrogenated Poly(C6-14 Olefin), Dicaprylyl Carbonate, Ammonium Acryloyldimethyltaurate/vp Copolymer, C14-22 Alcohols, Polymethylsilsesquioxane, C12-20 Alkyl Glucoside, Butylene Glycol, Acrylates/c10-30 Alkyl Acrylate Crosspolymer, Ethylhexylglycerin, Polyquaternium-51, Tromethamine, Sodium Hyaluronate, Coptis Japonica Root Extract, Houttuynia Cordata Extract, Oenothera Biennis (Evening Primrose) Flower Extract, Beta-glucan, Resveratrol, Gardenia Florida Fruit Extract, Lavandula Angustifolia (Lavender) Flower Extract, Opuntia Ficus-indica Stem Extract, Hydrolyzed Hyaluronic Acid, Centella Asiatica Leaf Extract, Phenoxyethanol, Hibiscus Sabdariffa Flower Extract, Tocopherol, Corallina Officinalis Extract, Ceramide NP");
-        Gson gson = new Gson();
-        String json = gson.toJson(cos);
+        List<Cosmetic> cos = cosService.getAllCos();
         response.setContentType("application/json");
-        response.getWriter().write(json);
-
+        response.getWriter().write(gson.toJson(cos));
+    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        BufferedReader reader = request.getReader();
+        Cosmetic newCos = gson.fromJson(reader,Cosmetic.class);
+        cosService.addCos(newCos);
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        }
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        BufferedReader reader = request.getReader();
+        Cosmetic updateCos = gson.fromJson(reader,Cosmetic.class);
+        if(cosService.updateCos(updateCos)){
+        response.setStatus(HttpServletResponse.SC_OK);}
+        else{
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);}
+    }
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        if(cosService.deleteCos(id)){
+            response.setStatus(HttpServletResponse.SC_OK);}
+        else{
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);}
     }
 }

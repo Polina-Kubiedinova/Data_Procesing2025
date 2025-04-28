@@ -5,19 +5,19 @@ import vue from '@vitejs/plugin-vue'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  build: {
+  /*build: {
     outDir: 'dist',
     emptyOutDir: true
-  },
-  base: '/laba2-1.0-SNAPSHOT/',
+  },*/
+  //base: '/Cosmetic_3/',
   server: {
     proxy: {
       '/cos': {
-        target: 'http://localhost:9090/laba2-1.0-SNAPSHOT/',
+        target: 'http://localhost:9090/Cosmetic_3/',
         changeOrigin: true,
         secure: false
       },
-      '/images': 'http://localhost:9090/laba2-1.0-SNAPSHOT/',
+      //'/images': 'http://localhost:9090/Cosmetic_3/',
     }
   }
 });
