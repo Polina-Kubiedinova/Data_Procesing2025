@@ -1,0 +1,2 @@
+git checkout -b pz1 main
+chcp 1251
