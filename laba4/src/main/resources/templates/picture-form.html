@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редагування картини</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body class="container mt-4">
+<h2 class="text-center mb-4">Редагування картини</h2>
+
+<div class="card shadow p-4 mx-auto" style="max-width:600px;">
+    <form action="/pictures/save" method="post" th:object="${picture}">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Назва картини</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control"
+                   placeholder="Введіть назву картини" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="image_url" class="form-label">URL зображення</label>
+            <input type="text" id="image_url" th:field="*{image_url}" class="form-control"
+                   placeholder="Вставте URL зображення">
+        </div>
+
+        <div class="mb-3">
+            <label for="author" class="form-label">Автор картини</label>
+            <textarea id="author" th:field="*{author}" class="form-control" rows="3"
+                      placeholder="Додайте автора картини"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Зберегти</button>
+            <a href="/pictures" class="btn btn-danger">Скасувати</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

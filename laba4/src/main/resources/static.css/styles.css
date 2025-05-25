@@ -1,0 +1,89 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Заголовок */
+h2 {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Кнопка додавання */
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-primary i {
+    margin-right: 5px;
+}
+
+/* Таблиця */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.table th {
+    background-color: #f1f1f1;
+    color: #444;
+    vertical-align: middle;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Зображення у таблиці */
+.picture-img {
+    border-radius: 10px;
+    object-fit: cover;
+    height: 70px;
+    width: 100px;
+}
+
+/* Кнопки редагування та видалення */
+.btn-warning {
+    background-color: #bd84fa;
+    border: none;
+    color: #212529;
+    margin-right: 5px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+/* Форма */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+/* Повідомлення про помилку */
+.text-center h1 {
+    color: #dc3545;
+    margin-top: 30px;
+}
+
+.text-center p {
+    color: #555;
+}
