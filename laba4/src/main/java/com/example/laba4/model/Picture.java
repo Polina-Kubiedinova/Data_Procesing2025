@@ -43,13 +43,4 @@ public class Picture {
 
     public void setImage_url(String image_url) {this.image_url = image_url;}
 
-    @Override
-    public String toString() {
-        return "Destination{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", image_url='" + image_url + '\'' +
-                '}';
-    }
 }
