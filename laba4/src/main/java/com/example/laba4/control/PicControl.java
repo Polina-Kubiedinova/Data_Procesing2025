@@ -1,27 +1,38 @@
 package com.example.laba4.control;
 
 import com.example.laba4.model.Picture;
-import com.example.laba4.service.PicService;
+import com.example.laba4.repository.PicRep;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/items")
-@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api/picture")
 public class PicControl{
-    private final PicService picService;
-
-    public PicControl(PicService picService) {
-        this.picService = picService;
-    }
+    @Autowired
+    private PicRep pictureRepository;
 
     @GetMapping
     public List<Picture> getAllDestinations() {
-        return picService.getAllPicture();
+        return pictureRepository.findAll();
+    }
+
+    @PostMapping
+    public Picture createPicture(@RequestBody Picture picture) {
+        return pictureRepository.save(picture);
+    }
+
+    @PutMapping("/{id}")
+    public Picture updatePicture(@PathVariable Long id, @RequestBody Picture pictureDetails) {
+        Picture picture = pictureRepository.findById(id).orElseThrow();
+        picture.setName(pictureDetails.getName());
+        picture.setAuthor(pictureDetails.getAuthor());
+        picture.setImage_url(pictureDetails.getImage_url());
+        return pictureRepository.save(picture);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePicture(@PathVariable Long id) {
+        pictureRepository.deleteById(id);
     }
 }
