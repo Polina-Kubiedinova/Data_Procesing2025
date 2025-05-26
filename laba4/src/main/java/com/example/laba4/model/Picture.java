@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "picture")
 public class Picture {
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
